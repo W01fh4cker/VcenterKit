@@ -129,11 +129,11 @@ python VcenterKit.py
 
 ## 2.2 长期维护吗？
 
-长期维护！本工具会和未来出的一系列工具，例如后面会开始写的`ExchangeKit`一样，都是我长期维护的项目，和之前的`Serein`(https://github.com/W01fh4cker/Serein)不一样（那个时候代码水平不行，加上`tkinter`做图形化太难受了，就不想维护了）。
+长期维护！本工具会和未来出的一系列工具，例如后面会开始写的`ExchangeKit`一样，都是我长期维护的项目，和之前的`Serein`( https://github.com/W01fh4cker/Serein )不一样（那个时候代码水平不行，加上`tkinter`做图形化太难受了，就不想维护了）。
 
 ## 2.3 代码写的有逻辑问题/有bug/有新利用方式，如何沟通？
 
-类似的问题，直接提交`issues`(https://github.com/W01fh4cker/VcenterKit/issues)，描述清楚相关环境，和具体细节，我看到之后会在当天内回复，一般20分钟内就会回复（因为我的电子邮件可以实时收到消息）。
+类似的问题，直接提交`issues`( https://github.com/W01fh4cker/VcenterKit/issues )，描述清楚相关环境，和具体细节，我看到之后会在当天内回复，一般20分钟内就会回复（因为我的电子邮件可以实时收到消息）。
 
 如果有代码能力的话，欢迎提交`pull request`。
 
@@ -143,7 +143,7 @@ python VcenterKit.py
 
 ## 2.5 和其他工具相比的优缺点？
 
-`Akatsuki`师傅（https://github.com/Schira4396）写的`VcenterKiller`是我非常喜欢的一个利用工具，我的`VcenterKit`与其定位并不相同，我这个是用于本地挂代理测试内网或者外网的`vcenter`漏洞，并且由于方便而弄了个`pyqt5`做图形化，这直接导致打包后的`exe`体积非常非常大；而`VcenterKiller`则是用`go`语言写的一款小巧的利用工具，可以直接传至对方服务器运行，也可以本地运行，可以跨平台，非常的方便。
+`Akatsuki`师傅（ https://github.com/Schira4396 ）写的`VcenterKiller`是我非常喜欢的一个利用工具，我的`VcenterKit`与其定位并不相同，我这个是用于本地挂代理测试内网或者外网的`vcenter`漏洞，并且由于方便而弄了个`pyqt5`做图形化，这直接导致打包后的`exe`体积非常非常大；而`VcenterKiller`则是用`go`语言写的一款小巧的利用工具，可以直接传至对方服务器运行，也可以本地运行，可以跨平台，非常的方便。
 
 对于`CVE-2021-21972`这个漏洞而言，本工具可以自定义`shell`的名字，并且自动尝试数种利用链，用起来还是很舒服的，哈哈。
 
