@@ -31,11 +31,13 @@ python VcenterKit.py
 
 上传哥斯拉马：
 
-![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/11edd12a79387cb0d58d2a24b86ca10.jpg)
+![11edd12a79387cb0d58d2a24b86ca10](https://github.com/W01fh4cker/VcenterKit/assets/101872898/3aac0b58-d2b7-49bd-a51e-5dc87e4f8845)
+
 
 ## 1.4 CVE-2021-21985模块
 
-![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/20230824002229.png)
+![image](https://github.com/W01fh4cker/VcenterKit/assets/101872898/e49cb0bb-0bbf-457b-b789-09ce3948a220)
+
 
 需要注意的是，这里的`RMI`和`Command`只能二选一填写，目前`rmi`由于测试环境的问题，还没有进行测试，可能会有问题，但是`command`目前测试下来没什么问题，这里放上一张之前写的时候测试的截图：
 
