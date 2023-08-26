@@ -4,7 +4,7 @@ urllib3.disable_warnings()
 
 def test_url_connection(url):
     try:
-        resp = requests.get(url, verify=False, allow_redirects=False)
+        requests.get(url, verify=False, allow_redirects=False)
         return 1
     except Exception as e:
         return 0

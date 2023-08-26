@@ -1,10 +1,10 @@
 ![VcenterKit](https://socialify.git.ci/W01fh4cker/VcenterKit/image?description=1&descriptionEditable=Vcenter%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8C%85%20%7C%20Vcenter%20Comprehensive%20Penetration%20and%20Exploitation%20Toolkit&font=Rokkitt&forks=1&issues=1&language=1&logo=https%3A%2F%2Fs2.loli.net%2F2022%2F06%2F25%2FgUAh2V5CiD96y8G.jpg&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1)
 
-# 1. 使用说明
+# 1. 使用说明(V 0.0.2)
 
 ## 1.1 安装与启动
 
-推荐使用`Python3.9`，其余版本未测试。
+推荐使用`Python3.9`，其余版本未测试，`Linux`和`mac`未测试。
 
 ```shell
 pip install -r requirements.txt
@@ -43,7 +43,7 @@ python VcenterKit.py
 
 ![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/e39abf9b303b95372fa666e919cf705.png)
 
-需要注意的是，当前版本（`v0.0.1`）的`shell`上传和内存马打入模块还没实现。但是核心思想就是替换`xml`：
+需要注意的是，当前版本（`v0.0.2`）的`shell`上传和内存马打入模块还没实现。但是核心思想就是替换`xml`：
 
 >  以下参考：https://daidaitiehanhan.github.io/2022/04/18/vCenter2021几个漏洞及后渗透/#不出网利用
 
@@ -97,29 +97,27 @@ python VcenterKit.py
 测试截图：
 ![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/20230824003704.png)
 
-## 1.6 CVE-2022-22954（下个版本更新）
+## 1.6 CVE-2022-22954
 
-预览图如下：
+测试截图如下：
 
-![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/20230824003914.png)
+![](https://raw.githubusercontent.com/W01fh4cker/blog_image/main/6ef6d341978aaaa6f36bb894594ac47.png)
 
-## 1.7 CVE-2022-22972（下个版本更新）
-
-预览：
+## 1.7 CVE-2022-22972
 
 ![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/20230824004009.png)
 
-## 1.8 后渗透利用模块（下个版本更新）
+## 1.8 后渗透利用模块
 
 本来是想把这些脚本集成到工具里面的，但是转念一想，没必要，直接弄成点按钮生成脚本到本地这种形式就可以了，这样直接一个工具走天下。
 
-![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/20230824004100.png)
+![](https://raw.githubusercontent.com/W01fh4cker/blog_image/main/20230827015200.png)
 
 ## 1.9 渗透测试记事本
 
 后面会放一些打vcenter的时候常用的命令、常看的文章上去
 
-![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/20230824004255.png)
+![](https://raw.githubusercontent.com/W01fh4cker/blog_image/main/e2ecc850aeca29a024a85fd08618e87.png)
 
 # 2. Q&A
 
@@ -151,7 +149,6 @@ python VcenterKit.py
 
 # 3. TODO
 
-* [ ] 完成未完成的几个模块的功能编写
 * [ ] 研究`CVE-2021-21985`的上传`shell`和打内存马的方式
 * [ ] 你们提建议
 

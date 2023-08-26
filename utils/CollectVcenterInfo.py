@@ -15,6 +15,8 @@ class VcenterInfo:
         self.result_text = result_text
         self.update_date = update_date
         self.hostname = self.url.replace("http://", "").replace("https://", "").split(':')[0]
+        if self.url == "":
+            self.update_date.emit(output_format("ERROR", "What's your url?"))
 
     def vcenter_basic_info_detection(self):
         url = f"{self.url}/sdk/"

