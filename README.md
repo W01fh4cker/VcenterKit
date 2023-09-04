@@ -1,15 +1,26 @@
 ![VcenterKit](https://socialify.git.ci/W01fh4cker/VcenterKit/image?description=1&descriptionEditable=Vcenter%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8C%85%20%7C%20Vcenter%20Comprehensive%20Penetration%20and%20Exploitation%20Toolkit&font=Rokkitt&forks=1&issues=1&language=1&logo=https%3A%2F%2Fs2.loli.net%2F2022%2F06%2F25%2FgUAh2V5CiD96y8G.jpg&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1)
 
-# 1. 使用说明(V 0.0.2)
+# 1. 使用说明(V 0.0.3)
 
-## 1.1 安装与启动
+## 1.1 安装与启动  
+### 1.1.1  Windows环境
 
-推荐使用`Python3.9`，其余版本未测试，`Linux`和`mac`未测试。
+推荐使用`Python3.9`
 
 ```shell
 pip install -r requirements.txt
 python VcenterKit.py
 ```
+
+### 1.1.2 Mac环境  
+非常感谢[outmansec](https://github.com/outmansec)师傅提出的针对`Mac`的修改版脚本的`pull request`。  
+```shell
+pip install -r requirements_PyQt6.txt
+python VcenterKit_PyQt6.py
+```
+启动截图如下：  
+![image](https://github.com/W01fh4cker/VcenterKit/assets/101872898/ffa99211-3191-41b0-a898-6ba33f741dea)
+
 
 ## 1.2 信息收集模块
 
