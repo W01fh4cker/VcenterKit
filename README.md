@@ -54,7 +54,7 @@ python VcenterKit_PyQt6.py
 
 ![](https://w01fh4cker-img-bed.oss-cn-hangzhou.aliyuncs.com/e39abf9b303b95372fa666e919cf705.png)
 
-需要注意的是，当前版本（`v0.0.2`）的`shell`上传和内存马打入模块还没实现。但是核心思想就是替换`xml`：
+需要注意的是，当前版本（`v0.0.3`）的`shell`上传和内存马打入模块还没实现。但是核心思想就是替换`xml`：
 
 >  以下参考：https://daidaitiehanhan.github.io/2022/04/18/vCenter2021几个漏洞及后渗透/#不出网利用
 
