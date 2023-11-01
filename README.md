@@ -11,6 +11,12 @@
 pip install -r requirements.txt
 python VcenterKit.py
 ```
+pyinstaller打包命令如下（根据自身环境自行修改）：
+```
+C:\Users\Administrator\AppData\Local\Programs\Python\Python39\Scripts\pyinstaller.exe --paths C:\Users\Administrator\AppData\Local\Programs\Python\Python39\Lib\site-packages\PyQt5\Qt5\bin -F -i logo.ico -w VcenterKit.py
+```  
+![image](https://github.com/W01fh4cker/VcenterKit/assets/101872898/6a823e1b-4a02-47fe-b176-abcd28dfe14c)
+
 
 ### 1.1.2 Mac环境  
 非常感谢[outmansec](https://github.com/outmansec)师傅提出的针对`Mac`的修改版脚本的`pull request`。  
